@@ -1,0 +1,243 @@
+<!-- ============================= -->
+<!-- WBN TrainingCast™ v1.0        -->
+<!-- Full Ghost-Ready Module       -->
+<!-- ============================= -->
+
+<div id="wbn-trainingcast">
+
+<style>
+#wbn-trainingcast {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #123246;
+}
+
+.wbn-panel {
+  background: #ffffff;
+  border: 1px solid #b7dfef;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.wbn-header {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.wbn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wbn-btn {
+  background: #59c2eb;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.wbn-btn-secondary {
+  background: #426679;
+}
+
+.wbn-input, .wbn-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.wbn-session {
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.footer-note {
+  font-size: 12px;
+  margin-top: 20px;
+}
+</style>
+
+<div class="wbn-panel">
+  <div class="wbn-header">Training Live – Online</div>
+  <div id="aboutText"></div>
+</div>
+
+<div class="wbn-panel">
+  <div class="wbn-header">Training Schedule</div>
+  <div id="schedule"></div>
+</div>
+
+<div class="wbn-panel">
+  <div class="wbn-header">Partner Spotlight</div>
+  <div id="sponsors"></div>
+</div>
+
+<div class="wbn-panel" id="adminLoginPanel">
+  <div class="wbn-header">Admin Access</div>
+  <input type="password" id="adminPass" class="wbn-input" placeholder="Enter password">
+  <button class="wbn-btn" onclick="login()">Login</button>
+</div>
+
+<div class="wbn-panel" id="adminPanel" style="display:none;">
+  <div class="wbn-header">Admin Panel</div>
+
+  <h4>Add Training Session</h4>
+  <input id="title" class="wbn-input" placeholder="Title">
+  <input id="date" class="wbn-input" type="date">
+  <input id="time" class="wbn-input" type="time">
+  <input id="link" class="wbn-input" placeholder="Join Link">
+  <textarea id="desc" class="wbn-textarea" placeholder="Description"></textarea>
+  <button class="wbn-btn" onclick="addSession()">Add</button>
+
+  <h4>Edit About Section</h4>
+  <textarea id="aboutEdit" class="wbn-textarea"></textarea>
+  <button class="wbn-btn" onclick="saveAbout()">Save About</button>
+
+  <h4>Sponsors</h4>
+  <input id="sponsorName" class="wbn-input" placeholder="Sponsor Name">
+  <input id="sponsorLink" class="wbn-input" placeholder="Sponsor Link">
+  <button class="wbn-btn" onclick="addSponsor()">Add Sponsor</button>
+
+  <h4>Backup</h4>
+  <button class="wbn-btn" onclick="exportData()">Export</button>
+  <input type="file" onchange="importData(event)">
+
+</div>
+
+<div class="footer-note">
+WBN TrainingCast™ v1.0 | 04-06-26 7:34 am PST
+</div>
+
+<script>
+const ITEMS_KEY = 'platform_items_master';
+const SETTINGS_KEY = 'platform_settings_master';
+const SPONSOR_KEY = 'platform_sponsors_master';
+
+const ADMIN_PASSWORD = "wbnadmin";
+
+function safeRead(key, fallback=[]) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) || fallback;
+  } catch { return fallback; }
+}
+
+function safeWrite(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
+function renderAll() {
+  renderSchedule();
+  renderAbout();
+  renderSponsors();
+}
+
+function renderSchedule() {
+  const items = safeRead(ITEMS_KEY, []);
+  const el = document.getElementById('schedule');
+  el.innerHTML = '';
+
+  items.forEach((item, i) => {
+    el.innerHTML += `
+      <div class="wbn-session">
+        <strong>${item.title}</strong><br>
+        ${item.date} ${item.time}<br>
+        ${item.desc}<br>
+        <a href="${item.link}" target="_blank"><button class="wbn-btn">Join</button></a>
+      </div>
+    `;
+  });
+}
+
+function renderAbout() {
+  const settings = safeRead(SETTINGS_KEY, {});
+  document.getElementById('aboutText').innerText = settings.about || 
+  "Get expert support in real time with WBN’s Help Desk – Live Online Training.";
+}
+
+function renderSponsors() {
+  const sponsors = safeRead(SPONSOR_KEY, []);
+  const el = document.getElementById('sponsors');
+  el.innerHTML = '';
+  sponsors.forEach(s => {
+    el.innerHTML += `<a href="${s.link}" target="_blank"><button class="wbn-btn-secondary">${s.name}</button></a>`;
+  });
+}
+
+function addSession() {
+  const items = safeRead(ITEMS_KEY, []);
+  items.push({
+    title: title.value,
+    date: date.value,
+    time: time.value,
+    link: link.value,
+    desc: desc.value
+  });
+  safeWrite(ITEMS_KEY, items);
+  renderSchedule();
+}
+
+function saveAbout() {
+  const settings = safeRead(SETTINGS_KEY, {});
+  settings.about = aboutEdit.value;
+  safeWrite(SETTINGS_KEY, settings);
+  renderAbout();
+}
+
+function addSponsor() {
+  const sponsors = safeRead(SPONSOR_KEY, []);
+  sponsors.push({
+    name: sponsorName.value,
+    link: sponsorLink.value
+  });
+  safeWrite(SPONSOR_KEY, sponsors);
+  renderSponsors();
+}
+
+function login() {
+  if (adminPass.value === ADMIN_PASSWORD) {
+    document.getElementById('adminPanel').style.display = 'block';
+    document.getElementById('adminLoginPanel').style.display = 'none';
+  }
+}
+
+function exportData() {
+  const data = {
+    items: safeRead(ITEMS_KEY),
+    settings: safeRead(SETTINGS_KEY),
+    sponsors: safeRead(SPONSOR_KEY)
+  };
+  const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = "trainingcast_backup.json";
+  a.click();
+}
+
+function importData(e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = function() {
+    const data = JSON.parse(reader.result);
+    safeWrite(ITEMS_KEY, data.items || []);
+    safeWrite(SETTINGS_KEY, data.settings || {});
+    safeWrite(SPONSOR_KEY, data.sponsors || []);
+    renderAll();
+  };
+  reader.readAsText(file);
+}
+
+renderAll();
+</script>
+
+</div>
