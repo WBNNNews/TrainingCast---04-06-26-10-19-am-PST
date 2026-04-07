@@ -1,0 +1,934 @@
+<!-- ===================================== -->
+<!-- WBN TrainingCast™ v1.6                -->
+<!-- Ghost-Ready · Style Guide v3.0        -->
+<!-- Masthead above ticker · Rounded edges -->
+<!-- IIFE + addEventListener · Fixed auth  -->
+<!-- ===================================== -->
+
+<div id="wbn-trainingcast">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+  #wbn-trainingcast {
+    --robin:       #59c2eb;
+    --robin-dark:  #2f8eb3;
+    --robin-deep:  #1a7aaa;
+    --robin-dim:   #b7dfef;
+    --robin-faint: #eef9fe;
+    --robin-line:  #c8ecfb;
+    --bg1:         #dff5ff;
+    --bg2:         #c8ecfb;
+    --text:        #123246;
+    --muted:       #426679;
+    --success:     #1f9d63;
+    --warning:     #e6a23c;
+    --danger:      #d9534f;
+    --success-bg:  #e8f7ee;
+    --warning-bg:  #fff5e8;
+    --danger-bg:   #fdf0f0;
+    max-width: 1100px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.45;
+  }
+
+  #wbn-trainingcast * { box-sizing: border-box; }
+
+  /* ── Shell ── */
+  #wbn-trainingcast .tc-shell {
+    background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    border: 1px solid var(--robin-dim);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 10px 28px rgba(18,50,70,.08);
+    overflow: hidden;
+  }
+
+  /* ── Masthead (above ticker) ── */
+  #wbn-trainingcast .tc-masthead {
+    background: linear-gradient(180deg, #ffffff, #f8fdff);
+    border: 1px solid var(--robin-dim);
+    border-radius: 16px;
+    padding: 16px 20px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  #wbn-trainingcast .tc-masthead-left {}
+  #wbn-trainingcast .tc-wordmark {
+    font-family: 'Oswald', Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--robin-dark);
+    margin: 0 0 4px;
+  }
+  #wbn-trainingcast .tc-cast-name {
+    font-family: 'Oswald', Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0;
+    line-height: 1;
+  }
+  #wbn-trainingcast .tc-masthead-badge {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--robin-dim);
+    padding: 5px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ── Ticker ── */
+  #wbn-trainingcast .tc-ticker-wrap {
+    background: #ffffff;
+    border: 1px solid var(--robin-dim);
+    border-radius: 14px;
+    padding: 9px 14px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(18,50,70,.04);
+    margin-bottom: 14px;
+  }
+  #wbn-trainingcast .tc-ticker-inner {
+    white-space: nowrap;
+    display: inline-block;
+    padding-left: 100%;
+    animation: tcTickerMove 28s linear infinite;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Source Code Pro', monospace;
+  }
+  #wbn-trainingcast .tc-ticker-label {
+    color: var(--robin-dark);
+    margin-right: 10px;
+  }
+  @keyframes tcTickerMove {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ── About panel ── */
+  #wbn-trainingcast .tc-panel {
+    background: linear-gradient(180deg, #ffffff, #f8fdff);
+    border: 1px solid var(--robin-dim);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(18,50,70,.05);
+  }
+  #wbn-trainingcast .tc-panel:last-child { margin-bottom: 0; }
+
+  #wbn-trainingcast .tc-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  #wbn-trainingcast .tc-about-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  #wbn-trainingcast .tc-about-text {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+  #wbn-trainingcast .tc-window-note {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--robin-dim);
+    padding: 5px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ── Grid ── */
+  #wbn-trainingcast .tc-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
+  }
+
+  /* ── Section titles inside panels ── */
+  #wbn-trainingcast .tc-section-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px;
+    color: var(--text);
+  }
+  #wbn-trainingcast .tc-section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+
+  /* ── Buttons ── */
+  #wbn-trainingcast .tc-btn,
+  #wbn-trainingcast button.tc-btn,
+  #wbn-trainingcast a.tc-btn {
+    appearance: none;
+    border: none;
+    text-decoration: none;
+    background: var(--robin);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: .18s ease;
+  }
+  #wbn-trainingcast .tc-btn:hover       { background: var(--robin-dark); }
+  #wbn-trainingcast .tc-btn.secondary   { background: var(--muted); }
+  #wbn-trainingcast .tc-btn.secondary:hover { background: #315265; }
+  #wbn-trainingcast .tc-btn.danger      { background: var(--danger); }
+  #wbn-trainingcast .tc-btn.danger:hover { background: #b8403c; }
+  #wbn-trainingcast .tc-btn.ghost       { background: #fff; color: var(--text); border: 1px solid var(--robin-dim); }
+  #wbn-trainingcast .tc-btn.ghost:hover { background: var(--robin-faint); }
+  #wbn-trainingcast .tc-btn.small       { padding: 7px 10px; font-size: 12px; border-radius: 8px; }
+
+  #wbn-trainingcast .tc-toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* ── Inputs ── */
+  #wbn-trainingcast .tc-input,
+  #wbn-trainingcast .tc-textarea,
+  #wbn-trainingcast .tc-select {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid var(--robin-dim);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+  #wbn-trainingcast .tc-input:focus,
+  #wbn-trainingcast .tc-textarea:focus { border-color: var(--robin); }
+  #wbn-trainingcast .tc-textarea { min-height: 100px; resize: vertical; padding-top: 12px; }
+
+  #wbn-trainingcast .tc-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 0 0 5px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  #wbn-trainingcast .tc-form-grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  #wbn-trainingcast .tc-form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  #wbn-trainingcast .tc-form-block  { margin-bottom: 12px; }
+
+  /* ── Session cards ── */
+  #wbn-trainingcast .tc-session {
+    border: 1px solid var(--robin-dim);
+    border-radius: 14px;
+    padding: 14px;
+    background: #fff;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(18,50,70,.03);
+  }
+  #wbn-trainingcast .tc-session.next {
+    background: linear-gradient(180deg, #ffffff, #effbff);
+    border-color: #95d7f0;
+  }
+  #wbn-trainingcast .tc-session:last-child { margin-bottom: 0; }
+  #wbn-trainingcast .tc-session-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  #wbn-trainingcast .tc-session-title { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  #wbn-trainingcast .tc-session-meta  { font-size: 12px; color: var(--muted); margin: 0; font-family: 'Source Code Pro', monospace; }
+  #wbn-trainingcast .tc-session-desc  { margin: 8px 0 12px; color: var(--text); font-size: 14px; }
+
+  /* ── Badges ── */
+  #wbn-trainingcast .tc-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid var(--robin-dim);
+    background: #fff;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  #wbn-trainingcast .tc-badge.live     { color: #fff; background: var(--success); border-color: var(--success); }
+  #wbn-trainingcast .tc-badge.upcoming { color: #7a4b00; background: var(--warning-bg); border-color: #f3d1a4; }
+
+  /* ── Empty state ── */
+  #wbn-trainingcast .tc-empty {
+    padding: 18px;
+    border: 1px dashed var(--robin-dim);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ── Sponsors ── */
+  #wbn-trainingcast .tc-sponsors { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* ── Admin ── */
+  #wbn-trainingcast .tc-admin-wrap { display: none; }
+  #wbn-trainingcast .tc-admin-box {
+    background: #fff;
+    border: 1px solid var(--robin-dim);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  #wbn-trainingcast .tc-admin-title { font-size: 15px; font-weight: 700; margin: 0 0 10px; }
+  #wbn-trainingcast .tc-admin-session {
+    border: 1px solid var(--robin-dim);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fbfeff;
+  }
+  #wbn-trainingcast .tc-admin-meta { font-size: 12px; color: var(--muted); margin: 4px 0 10px; font-family: 'Source Code Pro', monospace; }
+
+  #wbn-trainingcast .tc-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--robin-dim), transparent);
+    margin: 14px 0;
+  }
+
+  #wbn-trainingcast .tc-login-msg { margin-top: 8px; font-size: 13px; color: var(--danger); }
+
+  /* ── Footer ── */
+  #wbn-trainingcast .tc-footer {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 14px;
+    padding-left: 4px;
+  }
+
+  @media (max-width: 900px) {
+    #wbn-trainingcast .tc-grid        { grid-template-columns: 1fr; }
+    #wbn-trainingcast .tc-form-grid,
+    #wbn-trainingcast .tc-form-grid-3 { grid-template-columns: 1fr; }
+    #wbn-trainingcast .tc-masthead    { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<div class="tc-shell">
+
+  <!-- ── Masthead (above ticker) ── -->
+  <div class="tc-masthead">
+    <div class="tc-masthead-left">
+      <div class="tc-wordmark">WBN Global Inc.™</div>
+      <div class="tc-cast-name">TrainingCast™</div>
+    </div>
+    <div class="tc-masthead-badge" id="tcWindowBadge">Showing next 21 days</div>
+  </div>
+
+  <!-- ── Ticker ── -->
+  <div class="tc-ticker-wrap">
+    <div class="tc-ticker-inner" id="tcTickerText">
+      <span class="tc-ticker-label">Training Updates:</span>
+      Welcome to WBN Training Live – Online.
+    </div>
+  </div>
+
+  <!-- ── About panel ── -->
+  <div class="tc-panel">
+    <div class="tc-panel-header">
+      <div>
+        <div class="tc-about-title" id="tcTopTitle">Training Live – Online</div>
+        <p class="tc-about-text" id="tcTopAbout">Get expert support in real time with WBN's Help Desk – Live Online Training. Whether you're a member, publisher, or new user, we're here to guide you every step of the way.</p>
+      </div>
+      <div class="tc-window-note">Live · Help Desk</div>
+    </div>
+  </div>
+
+  <!-- ── Main grid ── -->
+  <div class="tc-grid">
+    <div>
+      <!-- Next training -->
+      <div class="tc-panel">
+        <div class="tc-section-title">Next Training</div>
+        <div class="tc-section-sub">The next upcoming session always appears first.</div>
+        <div id="tcNextTraining"></div>
+      </div>
+
+      <!-- Upcoming schedule -->
+      <div class="tc-panel">
+        <div class="tc-section-title">Upcoming Schedule</div>
+        <div class="tc-section-sub">Sessions within the next 3 weeks. Past sessions automatically disappear.</div>
+        <div id="tcScheduleList"></div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Sponsors -->
+      <div class="tc-panel">
+        <div class="tc-section-title">Sponsors</div>
+        <div class="tc-section-sub" style="margin-bottom:10px;">Supporting WBN Training.</div>
+        <div class="tc-sponsors" id="tcSponsors"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Login panel ── -->
+  <div class="tc-panel" id="tcLoginPanel">
+    <div class="tc-panel-header">
+      <div>
+        <div class="tc-admin-title" style="margin:0;">Admin Access</div>
+        <div class="tc-section-sub" style="margin:0;">Private editing controls for the training desk.</div>
+      </div>
+    </div>
+    <label class="tc-label" for="tcAdminPass">Password</label>
+    <input id="tcAdminPass" class="tc-input" type="password" placeholder="Enter password" autocomplete="off" style="max-width:320px;" />
+    <div class="tc-toolbar" style="margin-top:10px;">
+      <button class="tc-btn" type="button" id="tcLoginBtn">Login</button>
+    </div>
+    <div id="tcLoginMsg" class="tc-login-msg"></div>
+  </div>
+
+  <!-- ── Admin panel ── -->
+  <div class="tc-panel tc-admin-wrap" id="tcAdminWrap">
+    <div class="tc-panel-header">
+      <div>
+        <div class="tc-admin-title" style="margin:0;">Admin Control Panel</div>
+        <div class="tc-section-sub" style="margin:0;">Manage sessions, copy, ticker, sponsors, and data.</div>
+      </div>
+      <button class="tc-btn ghost small" type="button" id="tcLogoutBtn">Logout</button>
+    </div>
+
+    <!-- Ticker -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">Ticker Message</div>
+      <div class="tc-form-block">
+        <label class="tc-label" for="tcTickerInput">Scroll bar text</label>
+        <textarea id="tcTickerInput" class="tc-textarea" placeholder="Type the update bar message here"></textarea>
+      </div>
+      <div class="tc-toolbar">
+        <button class="tc-btn" type="button" id="tcSaveTickerBtn">Save Ticker</button>
+      </div>
+    </div>
+
+    <!-- Top copy -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">About Section</div>
+      <div class="tc-form-block">
+        <label class="tc-label" for="tcSettingsTitle">Section Title</label>
+        <input id="tcSettingsTitle" class="tc-input" placeholder="Training Live – Online" />
+      </div>
+      <div class="tc-form-block">
+        <label class="tc-label" for="tcSettingsAbout">About Copy</label>
+        <textarea id="tcSettingsAbout" class="tc-textarea" placeholder="Editable about copy"></textarea>
+      </div>
+      <div class="tc-toolbar">
+        <button class="tc-btn" type="button" id="tcSaveTopCopyBtn">Save Copy</button>
+      </div>
+    </div>
+
+    <!-- Add / Edit session -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">Add / Edit Training Session</div>
+      <input type="hidden" id="tcEditIndex" value="-1" />
+
+      <div class="tc-form-block">
+        <label class="tc-label" for="tcTitleInput">Training Title</label>
+        <input id="tcTitleInput" class="tc-input" placeholder="Example: Publisher Training Session" />
+      </div>
+
+      <div class="tc-form-grid-3">
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcDateInput">Date</label>
+          <input id="tcDateInput" class="tc-input" type="date" />
+        </div>
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcTimeInput">Start Time</label>
+          <input id="tcTimeInput" class="tc-input" type="time" />
+        </div>
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcDurationInput">Duration (min)</label>
+          <input id="tcDurationInput" class="tc-input" type="number" min="15" step="5" placeholder="60" />
+        </div>
+      </div>
+
+      <div class="tc-form-grid">
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcLinkInput">Training Link</label>
+          <input id="tcLinkInput" class="tc-input" placeholder="https://..." />
+        </div>
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcRecurringInput">Recurring Weekly?</label>
+          <select id="tcRecurringInput" class="tc-select">
+            <option value="no">No</option>
+            <option value="weekly">Yes – Weekly</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-form-block">
+        <label class="tc-label" for="tcDescInput">Short Description</label>
+        <textarea id="tcDescInput" class="tc-textarea" placeholder="Small description for the session"></textarea>
+      </div>
+
+      <div class="tc-toolbar">
+        <button class="tc-btn" type="button" id="tcSaveSessionBtn">Save Session</button>
+        <button class="tc-btn secondary" type="button" id="tcResetSessionBtn">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- Sponsors -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">Sponsors</div>
+      <div class="tc-form-grid">
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcSponsorName">Button Text</label>
+          <input id="tcSponsorName" class="tc-input" placeholder="Sponsor Name" />
+        </div>
+        <div class="tc-form-block">
+          <label class="tc-label" for="tcSponsorLink">Button Link</label>
+          <input id="tcSponsorLink" class="tc-input" placeholder="https://..." />
+        </div>
+      </div>
+      <div class="tc-toolbar">
+        <button class="tc-btn" type="button" id="tcAddSponsorBtn">Add Sponsor</button>
+      </div>
+      <div class="tc-divider"></div>
+      <div id="tcSponsorAdminList"></div>
+    </div>
+
+    <!-- Session manager -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">Session Manager</div>
+      <div class="tc-section-sub" style="margin-bottom:10px;">Edit, delete, reorder, and review recurring rules.</div>
+      <div id="tcAdminSessionList"></div>
+    </div>
+
+    <!-- Data management -->
+    <div class="tc-admin-box">
+      <div class="tc-admin-title">Data Management</div>
+      <div class="tc-section-sub" style="margin-bottom:10px;">Backup and restore all TrainingCast data.</div>
+      <div class="tc-toolbar" style="margin-bottom:8px;">
+        <button class="tc-btn" type="button" id="tcExportBtn">Download Data</button>
+        <label class="tc-btn secondary" for="tcImportInput" style="cursor:pointer;">Upload Data</label>
+        <input id="tcImportInput" type="file" accept="application/json" style="display:none;" />
+      </div>
+      <div class="tc-section-sub">Includes sessions, sponsors, settings, ticker, archive, and meta.</div>
+    </div>
+  </div>
+
+  <div class="tc-footer">WBN TrainingCast™ v1.6 | 04-07-26 PST</div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var KEYS = {
+    items    : 'trainingcast_items_v15',
+    sponsors : 'trainingcast_sponsors_v15',
+    adminOpen: 'trainingcast_admin_open_v15',
+    archive  : 'trainingcast_archive_v15',
+    settings : 'trainingcast_settings_v15',
+    meta     : 'trainingcast_meta_v15',
+    ticker   : 'trainingcast_ticker_v15'
+  };
+
+  var PASSWORD    = '1234';
+  var WINDOW_DAYS = 21;
+
+  var DEFAULT_SETTINGS = {
+    topTitle  : 'Training Live \u2013 Online',
+    aboutText : "Get expert support in real time with WBN\u2019s Help Desk \u2013 Live Online Training. Whether you're a member, publisher, or new user, we\u2019re here to guide you every step of the way."
+  };
+  var DEFAULT_TICKER = 'Welcome to WBN Training Live \u2013 Online.';
+
+  /* ── Storage ── */
+  function read(key, fallback) {
+    try { var r = localStorage.getItem(key); return r !== null ? JSON.parse(r) : fallback; }
+    catch(e) { return fallback; }
+  }
+  function write(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+  }
+
+  /* ── Helpers ── */
+  function uid() { return 'id_' + Math.random().toString(36).slice(2,10) + '_' + Date.now().toString(36); }
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function fmt(dt) {
+    try { return dt.toLocaleString([],{weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
+    catch(e) { return ''; }
+  }
+  function makeDate(d,t) { if(!d) return null; var x=new Date(d+'T'+(t||'00:00')); return isNaN(x.getTime())?null:x; }
+  function addDays(d,n)  { var x=new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
+  function addMins(d,n)  { var x=new Date(d.getTime()); x.setMinutes(x.getMinutes()+(Number(n)||0)); return x; }
+  function el(id) { return document.getElementById(id); }
+
+  /* ── Data ── */
+  function normalise(items) {
+    return (Array.isArray(items)?items:[]).map(function(i){
+      return { id:i.id||uid(), title:i.title||'', date:i.date||'', time:i.time||'',
+               duration:i.duration||60, link:i.link||'', desc:i.desc||'',
+               recurring:i.recurring||'no', createdAt:i.createdAt||new Date().toISOString() };
+    });
+  }
+  function getItems()       { return normalise(read(KEYS.items,[])); }
+  function saveItems(items) { write(KEYS.items,normalise(items)); }
+  function getSponsors()          { var s=read(KEYS.sponsors,[]); return Array.isArray(s)?s:[]; }
+  function saveSponsors(sponsors) { write(KEYS.sponsors,Array.isArray(sponsors)?sponsors:[]); }
+  function getSettings()          { return Object.assign({},DEFAULT_SETTINGS,read(KEYS.settings,{})||{}); }
+  function saveSettings(s)        { write(KEYS.settings,Object.assign({},DEFAULT_SETTINGS,s||{})); }
+  function getTicker()            { return read(KEYS.ticker,DEFAULT_TICKER)||DEFAULT_TICKER; }
+  function saveTickerVal(t)       { write(KEYS.ticker,t||DEFAULT_TICKER); }
+  function getArchive()           { var a=read(KEYS.archive,[]); return Array.isArray(a)?a:[]; }
+  function saveArchive(a)         { write(KEYS.archive,Array.isArray(a)?a:[]); }
+
+  /* ── Occurrences ── */
+  function expand(items) {
+    var now=new Date(), end=addDays(now,WINDOW_DAYS), out=[];
+    items.forEach(function(item,bi){
+      var start=makeDate(item.date,item.time); if(!start) return;
+      var dur=Number(item.duration)>0?Number(item.duration):60;
+      if(item.recurring==='weekly'){
+        for(var off=0;off<=WINDOW_DAYS+7;off+=7){
+          var s=addDays(start,off), e=addMins(s,dur);
+          if(e<=now||s>end) continue;
+          out.push(Object.assign({},item,{occurrenceStart:s,occurrenceEnd:e,baseIndex:bi}));
+        }
+      } else {
+        var s2=start, e2=addMins(s2,dur);
+        if(e2<=now||s2>end) return;
+        out.push(Object.assign({},item,{occurrenceStart:s2,occurrenceEnd:e2,baseIndex:bi}));
+      }
+    });
+    out.sort(function(a,b){return a.occurrenceStart-b.occurrenceStart;});
+    return out;
+  }
+
+  function status(item) {
+    var now=new Date();
+    return (now>=item.occurrenceStart&&now<item.occurrenceEnd)?'live':'upcoming';
+  }
+
+  /* ── Session card HTML ── */
+  function sessionCard(item, isNext) {
+    var st=status(item);
+    var label=st==='live'?'LIVE NOW':'UPCOMING';
+    var startL=fmt(item.occurrenceStart);
+    var endL=item.occurrenceEnd?item.occurrenceEnd.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):'';
+    var durT=Number(item.duration)?(Number(item.duration)+' min'):'';
+    var recT=item.recurring==='weekly'?'Repeats weekly':'One-time session';
+    return '<div class="tc-session'+(isNext?' next':'')+'">'+
+      '<div class="tc-session-top">'+
+        '<div>'+
+          '<div class="tc-session-title">'+esc(item.title||'Untitled Training')+'</div>'+
+          '<div class="tc-session-meta">'+esc(startL)+(endL?' \u2022 Ends '+esc(endL):'')+(durT?' \u2022 '+esc(durT):'')+' \u2022 '+esc(recT)+'</div>'+
+        '</div>'+
+        '<div class="tc-badge '+(st==='live'?'live':'upcoming')+'">'+label+'</div>'+
+      '</div>'+
+      (item.desc?'<div class="tc-session-desc">'+esc(item.desc)+'</div>':'')+
+      '<div class="tc-toolbar">'+
+        (item.link?'<a class="tc-btn" href="'+esc(item.link)+'" target="_blank" rel="noopener noreferrer">Join Training</a>':'')+
+      '</div>'+
+    '</div>';
+  }
+
+  function defaultSponsors() {
+    var s=getSponsors(); if(s.length) return s;
+    return [{id:'d1',name:'Sponsor',link:'#'},{id:'d2',name:'Sponsor',link:'#'},{id:'d3',name:'Sponsor',link:'#'}];
+  }
+
+  /* ── Render public ── */
+  function renderPublic() {
+    var settings=getSettings();
+    el('tcTopTitle').textContent  = settings.topTitle  || DEFAULT_SETTINGS.topTitle;
+    el('tcTopAbout').textContent  = settings.aboutText || DEFAULT_SETTINGS.aboutText;
+    el('tcTickerText').innerHTML  = '<span class="tc-ticker-label">Training Updates:</span>'+esc(getTicker());
+
+    var occ=expand(getItems());
+    var nw=el('tcNextTraining'), lw=el('tcScheduleList');
+    if(!occ.length){
+      nw.innerHTML='<div class="tc-empty">No upcoming training sessions are currently scheduled in the next 3 weeks.</div>';
+      lw.innerHTML='<div class="tc-empty">Add training sessions in Admin to begin building the schedule.</div>';
+    } else {
+      nw.innerHTML=sessionCard(occ[0],true);
+      var rest=occ.slice(1);
+      lw.innerHTML=rest.length?rest.map(function(i){return sessionCard(i,false);}).join(''):'<div class="tc-empty">No additional upcoming sessions right now.</div>';
+    }
+
+    el('tcSponsors').innerHTML=defaultSponsors().map(function(s){
+      return '<a class="tc-btn secondary" href="'+esc(s.link||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(s.name||'Sponsor')+'</a>';
+    }).join('');
+  }
+
+  /* ── Render admin ── */
+  function renderAdmin() {
+    var isOpen=read(KEYS.adminOpen,false)===true;
+    var aw=el('tcAdminWrap'), lp=el('tcLoginPanel');
+    if(isOpen){ aw.style.display='block'; lp.style.display='none'; }
+    else      { aw.style.display='none';  lp.style.display='block'; return; }
+
+    var settings=getSettings();
+    el('tcSettingsTitle').value = settings.topTitle  || '';
+    el('tcSettingsAbout').value = settings.aboutText || '';
+    el('tcTickerInput').value   = getTicker();
+
+    var items=getItems();
+    el('tcAdminSessionList').innerHTML=items.length?items.map(function(item,idx){
+      var nv=expand([item]);
+      var nt=nv.length?'Next visible: '+fmt(nv[0].occurrenceStart):'No visible occurrence in next 3 weeks';
+      return '<div class="tc-admin-session">'+
+        '<div class="tc-admin-title" style="margin:0;">'+esc(item.title||'Untitled Training')+'</div>'+
+        '<div class="tc-admin-meta">'+
+          'Base date: '+esc(item.date||'\u2014')+' \u2022 Time: '+esc(item.time||'\u2014')+
+          ' \u2022 Duration: '+esc(String(item.duration||60))+' min'+
+          ' \u2022 '+(item.recurring==='weekly'?'Weekly recurring':'One-time')+'<br>'+esc(nt)+
+        '</div>'+
+        '<div class="tc-toolbar">'+
+          '<button class="tc-btn small" data-action="edit" data-index="'+idx+'">Edit</button>'+
+          '<button class="tc-btn ghost small" data-action="up" data-index="'+idx+'">Move Up</button>'+
+          '<button class="tc-btn ghost small" data-action="down" data-index="'+idx+'">Move Down</button>'+
+          '<button class="tc-btn danger small" data-action="delete" data-index="'+idx+'">Delete</button>'+
+        '</div>'+
+      '</div>';
+    }).join(''):'<div class="tc-empty">No saved training sessions yet.</div>';
+
+    var sponsors=getSponsors();
+    el('tcSponsorAdminList').innerHTML=sponsors.length?sponsors.map(function(s,idx){
+      return '<div class="tc-admin-session">'+
+        '<div class="tc-admin-title" style="margin:0;">'+esc(s.name||'Sponsor')+'</div>'+
+        '<div class="tc-admin-meta">'+esc(s.link||'#')+'</div>'+
+        '<div class="tc-toolbar">'+
+          '<button class="tc-btn danger small" data-action="deleteSponsor" data-index="'+idx+'">Delete</button>'+
+        '</div>'+
+      '</div>';
+    }).join(''):'<div class="tc-empty">No custom sponsors yet. Showing default buttons.</div>';
+  }
+
+  function renderAll() { renderPublic(); renderAdmin(); }
+
+  /* ── Session form ── */
+  function resetForm() {
+    el('tcEditIndex').value='−1';
+    ['tcTitleInput','tcDateInput','tcTimeInput','tcLinkInput','tcDescInput'].forEach(function(id){el(id).value='';});
+    el('tcDurationInput').value='60';
+    el('tcRecurringInput').value='no';
+    el('tcEditIndex').value='-1';
+  }
+
+  function loadIntoForm(idx) {
+    var items=getItems(), item=items[idx]; if(!item) return;
+    el('tcEditIndex').value=String(idx);
+    el('tcTitleInput').value=item.title||'';
+    el('tcDateInput').value=item.date||'';
+    el('tcTimeInput').value=item.time||'';
+    el('tcDurationInput').value=String(item.duration||60);
+    el('tcLinkInput').value=item.link||'';
+    el('tcRecurringInput').value=item.recurring||'no';
+    el('tcDescInput').value=item.desc||'';
+  }
+
+  function saveSession() {
+    var editIdx=Number(el('tcEditIndex').value);
+    var title=el('tcTitleInput').value.trim();
+    var date=el('tcDateInput').value;
+    var time=el('tcTimeInput').value;
+    var duration=Number(el('tcDurationInput').value||60);
+    var link=el('tcLinkInput').value.trim();
+    var recurring=el('tcRecurringInput').value;
+    var desc=el('tcDescInput').value.trim();
+    if(!title||!date||!time){ alert('Please add at least a title, date, and time.'); return; }
+    var items=getItems();
+    var payload={
+      id:(editIdx>=0&&items[editIdx])?items[editIdx].id:uid(),
+      title:title, date:date, time:time,
+      duration:duration>0?duration:60, link:link, desc:desc,
+      recurring:recurring==='weekly'?'weekly':'no',
+      createdAt:(editIdx>=0&&items[editIdx])?items[editIdx].createdAt:new Date().toISOString()
+    };
+    if(editIdx>=0&&items[editIdx]) items[editIdx]=payload; else items.push(payload);
+    saveItems(items); resetForm(); renderAll();
+  }
+
+  function deleteSession(idx) {
+    var items=getItems(), item=items[idx]; if(!item) return;
+    if(!confirm('Delete this training session?')) return;
+    var removed=items.splice(idx,1)[0];
+    saveItems(items);
+    var archive=getArchive();
+    archive.unshift(Object.assign({},removed,{archivedAt:new Date().toISOString()}));
+    saveArchive(archive); renderAll();
+  }
+
+  function moveSession(idx, dir) {
+    var items=getItems(), target=dir==='up'?idx-1:idx+1;
+    if(target<0||target>=items.length) return;
+    var tmp=items[idx]; items[idx]=items[target]; items[target]=tmp;
+    saveItems(items); renderAll();
+  }
+
+  /* ── Admin actions ── */
+  function saveTopCopy() {
+    saveSettings({
+      topTitle: el('tcSettingsTitle').value.trim()||DEFAULT_SETTINGS.topTitle,
+      aboutText:el('tcSettingsAbout').value.trim()||DEFAULT_SETTINGS.aboutText
+    }); renderAll();
+  }
+
+  function saveTicker() { saveTickerVal(el('tcTickerInput').value.trim()||DEFAULT_TICKER); renderAll(); }
+
+  function addSponsor() {
+    var name=el('tcSponsorName').value.trim(), link=el('tcSponsorLink').value.trim();
+    if(!name||!link){ alert('Please add both button text and a link.'); return; }
+    var s=getSponsors(); s.push({id:uid(),name:name,link:link}); saveSponsors(s);
+    el('tcSponsorName').value=''; el('tcSponsorLink').value=''; renderAll();
+  }
+
+  function deleteSponsor(idx) {
+    var s=getSponsors(); s.splice(idx,1); saveSponsors(s); renderAll();
+  }
+
+  function exportBackup() {
+    var payload={
+      version:'WBN TrainingCast\u2122 v1.6', exportedAt:new Date().toISOString(),
+      items:getItems(), sponsors:getSponsors(), settings:getSettings(),
+      ticker:getTicker(), archive:getArchive(), meta:read(KEYS.meta,{})
+    };
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='trainingcast_backup_v1_6.json';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},250);
+  }
+
+  function importBackup(file) {
+    if(!file) return;
+    var reader=new FileReader();
+    reader.onload=function(evt){
+      try{
+        var data=JSON.parse(evt.target.result);
+        saveItems(Array.isArray(data.items)?data.items:[]);
+        saveSponsors(Array.isArray(data.sponsors)?data.sponsors:[]);
+        saveSettings(data.settings||DEFAULT_SETTINGS);
+        saveTickerVal(data.ticker||DEFAULT_TICKER);
+        saveArchive(Array.isArray(data.archive)?data.archive:[]);
+        write(KEYS.meta,data.meta||{});
+        renderAll(); alert('Data uploaded successfully.');
+      } catch(e){ alert('Upload failed. Please use a valid TrainingCast data file.'); }
+    };
+    reader.readAsText(file);
+  }
+
+  /* ── Login / Logout ── */
+  function login() {
+    var pass=(el('tcAdminPass').value||'').trim();
+    var msg=el('tcLoginMsg');
+    if(pass===PASSWORD){
+      write(KEYS.adminOpen,true);
+      el('tcAdminWrap').style.display='block';
+      el('tcLoginPanel').style.display='none';
+      msg.textContent='';
+      el('tcAdminPass').value='';
+      renderAdmin();
+    } else {
+      msg.textContent='Incorrect password. Please try again.';
+      el('tcAdminPass').value='';
+      el('tcAdminPass').focus();
+    }
+  }
+
+  function logout() {
+    write(KEYS.adminOpen,false);
+    el('tcAdminWrap').style.display='none';
+    el('tcLoginPanel').style.display='block';
+  }
+
+  /* ── Seed ── */
+  function seed() {
+    if(read(KEYS.items,null)===null)     write(KEYS.items,[]);
+    if(read(KEYS.sponsors,null)===null)  write(KEYS.sponsors,[]);
+    if(read(KEYS.archive,null)===null)   write(KEYS.archive,[]);
+    if(read(KEYS.settings,null)===null)  write(KEYS.settings,DEFAULT_SETTINGS);
+    if(read(KEYS.ticker,null)===null)    write(KEYS.ticker,DEFAULT_TICKER);
+    if(read(KEYS.meta,null)===null)      write(KEYS.meta,{initializedAt:new Date().toISOString()});
+    if(read(KEYS.adminOpen,null)===null) write(KEYS.adminOpen,false);
+  }
+
+  /* ── Event delegation for dynamic admin lists ── */
+  function onAdminClick(e) {
+    var btn=e.target.closest('[data-action]'); if(!btn) return;
+    var action=btn.getAttribute('data-action');
+    var idx=parseInt(btn.getAttribute('data-index'),10);
+    if(action==='edit')          loadIntoForm(idx);
+    else if(action==='up')       moveSession(idx,'up');
+    else if(action==='down')     moveSession(idx,'down');
+    else if(action==='delete')   deleteSession(idx);
+    else if(action==='deleteSponsor') deleteSponsor(idx);
+  }
+
+  /* ── Init ── */
+  seed();
+  if(read(KEYS.adminOpen,false)===true){
+    el('tcAdminWrap').style.display='block';
+    el('tcLoginPanel').style.display='none';
+  }
+  renderAll();
+
+  /* Static buttons */
+  el('tcLoginBtn').addEventListener('click', login);
+  el('tcLogoutBtn').addEventListener('click', logout);
+  el('tcSaveTickerBtn').addEventListener('click', saveTicker);
+  el('tcSaveTopCopyBtn').addEventListener('click', saveTopCopy);
+  el('tcSaveSessionBtn').addEventListener('click', saveSession);
+  el('tcResetSessionBtn').addEventListener('click', resetForm);
+  el('tcAddSponsorBtn').addEventListener('click', addSponsor);
+  el('tcExportBtn').addEventListener('click', exportBackup);
+
+  el('tcAdminPass').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
+  el('tcImportInput').addEventListener('change', function(e){
+    var f=e.target.files&&e.target.files[0]?e.target.files[0]:null;
+    importBackup(f); e.target.value='';
+  });
+
+  el('tcAdminSessionList').addEventListener('click', onAdminClick);
+  el('tcSponsorAdminList').addEventListener('click', onAdminClick);
+
+})();
+</script>
+</div>
