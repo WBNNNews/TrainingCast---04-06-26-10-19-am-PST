@@ -1,0 +1,105 @@
+{
+  "version": "WBN TrainingCast™ v1.7",
+  "exportedAt": "2026-05-02T17:14:59.324Z",
+  "items": [
+    {
+      "id": "id_rv2cyi76_mnp6j2a0",
+      "title": "Wednesday Training",
+      "date": "2026-04-08",
+      "time": "10:00",
+      "duration": 60,
+      "link": "https://meetn.com/worldreferralnetwork",
+      "desc": "Wednesday Training happens every Wed --- rest of copy",
+      "recurring": "weekly",
+      "createdAt": "2026-04-07T22:17:05.352Z"
+    },
+    {
+      "id": "id_3gi17j6z_mnpa4yu4",
+      "title": "Thursday Training",
+      "date": "2026-04-09",
+      "time": "10:00",
+      "duration": 60,
+      "link": "https://meetn.com/worldreferralnetwork",
+      "desc": "Thursday Training: Major upgrades and new features released—log in and explore what’s new.",
+      "recurring": "weekly",
+      "createdAt": "2026-04-07T23:58:06.172Z"
+    },
+    {
+      "id": "id_3pfb6paq_mnpa7qpk",
+      "title": "Friday Training",
+      "date": "2026-04-10",
+      "time": "10:00",
+      "duration": 60,
+      "link": "https://meetn.com/worldreferralnetwork",
+      "desc": "Friday Training: Lock in the week—review what worked, tighten what didn’t, and set your next move.",
+      "recurring": "weekly",
+      "createdAt": "2026-04-08T00:00:15.608Z"
+    },
+    {
+      "id": "id_32u0tp22_mnpaeogj",
+      "title": "Saturday Training",
+      "date": "2026-04-11",
+      "time": "07:00",
+      "duration": 60,
+      "link": "https://meetn.com/worldreferralnetwork",
+      "desc": "Saturday Training: Refine and reset—sharpen your skills, clear the noise, and prepare to move stronger next week.",
+      "recurring": "weekly",
+      "createdAt": "2026-04-08T00:05:39.283Z"
+    },
+    {
+      "id": "id_5g201c8u_mnx63kaq",
+      "title": "Monday Training",
+      "date": "2026-04-13",
+      "time": "08:00",
+      "duration": 60,
+      "link": "https://meetn.com/worldreferralnetwork",
+      "desc": "Monday Training: Kick off the week with clarity, sharpen your focus, and set the tone for decisive action that drives results.",
+      "recurring": "weekly",
+      "createdAt": "2026-04-13T12:27:11.618Z"
+    },
+    {
+      "id": "id_uety65o2_mnx6b0nu",
+      "title": "Tuesday Training",
+      "date": "2026-04-14",
+      "time": "10:00",
+      "duration": 60,
+      "link": "Tuesday Training: Build momentum—refine your strategy, take focused action, and move one step closer to measurable progress.",
+      "desc": "Tuesday Training: Build momentum—refine your strategy, take focused action, and move one step closer to measurable progress.",
+      "recurring": "weekly",
+      "createdAt": "2026-04-13T12:32:59.418Z"
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "id_8w1dc0vv_mook9fnx",
+      "name": "WRN Pay - Lowest Credit Card Fees - Period!",
+      "link": "https://www.youtube.com/watch?v=yXu_hHu3qBo",
+      "createdAt": "2026-05-02T16:33:26.925Z"
+    },
+    {
+      "id": "id_ap923nxe_mookfqdh",
+      "name": "How Becoming A WBN Contributor Builds Your Brand - For Free!",
+      "link": "https://www.youtube.com/watch?v=bjyO0l6RLrk&t=37s",
+      "createdAt": "2026-05-02T16:38:20.741Z"
+    }
+  ],
+  "sponsorArchive": [],
+  "sponsorStats": {
+    "d1::imp": 2,
+    "d2::imp": 2,
+    "d3::imp": 2,
+    "id_8w1dc0vv_mook9fnx::imp": 3,
+    "id_8w1dc0vv_mook9fnx::clk": 1,
+    "id_ap923nxe_mookfqdh::imp": 1,
+    "id_ap923nxe_mookfqdh::clk": 1
+  },
+  "settings": {
+    "topTitle": "Training Live – Online",
+    "aboutText": "Get expert support in real time with WBN’s Help Desk – Live Online Training. Whether you're a member, publisher, or new user, we’re here to guide you every step of the way."
+  },
+  "ticker": "Welcome to WBN Training Live – Online. Stay in Action  - Act first. Clarity follows. - ➡ Do one thing you’ve been avoiding—now.",
+  "archive": [],
+  "meta": {
+    "initializedAt": "2026-04-07T22:15:10.275Z"
+  }
+}
